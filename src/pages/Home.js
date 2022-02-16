@@ -224,7 +224,7 @@ const Home = () => {
                 </SimpleGrid>
             </Flex>
 
-            <Box maxW="7xl" pt={5} px={{ base: 2, sm: 12, md: 17 }} py={4}>
+            <Container centerContent maxW="7xl" pt={5} px={{ base: 2, sm: 12, md: 17 }} py={4}>
                 <chakra.h1
                     textAlign={'center'}
                     fontSize={'4xl'}
@@ -254,7 +254,7 @@ const Home = () => {
                         icon={<GoLocation size={'3em'} />}
                     />
                 </SimpleGrid>
-            </Box>
+            </Container>
         </>
     )
 }

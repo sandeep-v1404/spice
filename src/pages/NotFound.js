@@ -9,7 +9,7 @@ import {
 export default function NotFound() {
     return (
         <>
-            <Container maxW={'3xl'} maxH={'lg'}>
+            <Container maxW={'3xl'} height={'100vh'}>
                 <Stack
                     as={Box}
                     textAlign={'center'}
