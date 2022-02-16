@@ -16,6 +16,11 @@ import {
 import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
 import { MoonIcon, SunIcon } from '@chakra-ui/icons';
 import { Link as ReachLink } from "react-router-dom";
+import { useEffect, useState } from 'react';
+import { signOutCustom } from '../firebase';
+import {
+    getAuth, onAuthStateChanged
+} from "firebase/auth";
 const Links = [
     {
         name: 'Home',
@@ -48,6 +53,19 @@ const NavLink = ({ href, name }) => (
 export default function Navbar() {
     const { isOpen, onOpen, onClose } = useDisclosure();
     const { colorMode, toggleColorMode } = useColorMode();
+
+    const [user, setUser] = useState("");
+    useEffect(() => {
+        const auth = getAuth();
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                setUser(user.uid);
+            } else {
+                setUser(null);
+            }
+        });
+    }, [user]);
+
     return (
         <>
             <Box bg={useColorModeValue('gray.400', 'gray.900')} px={4}>
@@ -73,6 +91,9 @@ export default function Navbar() {
                             {Links.map((link, index) => (
                                 <NavLink key={index} name={link.name} href={link.href} />
                             ))}
+                            {user &&
+                                <Button onClick={() => signOutCustom()} >Logout</Button>
+                            }
                         </HStack>
                     </HStack>
                     <Flex alignItems={'center'}>
@@ -87,9 +108,15 @@ export default function Navbar() {
                             {Links.map((link, index) => (
                                 <NavLink key={index} name={link.name} href={link.href} />
                             ))}
+                            {user &&
+                                <Button onClick={() => signOutCustom()} >Logout</Button>
+                            }
                         </Stack>
+
+
                     </Box>
                 ) : null}
+
             </Box>
         </>
     );

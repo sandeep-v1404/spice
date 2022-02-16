@@ -1,16 +1,11 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import {
-    getAuth,
-    createUserWithEmailAndPassword,
     signInWithEmailAndPassword,
-    signOut
+    signOut,
+    getAuth
 } from "firebase/auth";
 import { getFirestore, collection, getDocs, addDoc, } from 'firebase/firestore/lite';
-// import { } from "firebase/firestore";
-
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -51,9 +46,11 @@ export const signInCustom = async (email, password) => {
             const errorMessage = error.message;
             console.log(errorCode, errorMessage);
         });
-    console.log(userCredential)
+    console.log("user " + userCredential.user)
     // Do something with userCredential if you want to
 }
+
+
 export const signOutCustom = async () => {
     await signOut(auth)
         .catch(err => console.log(err));
