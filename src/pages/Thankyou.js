@@ -1,23 +1,30 @@
-import React from "react";
 import {
+    Box,
+    Heading,
+    Container,
+    Text,
     Stack,
-    useColorModeValue,
 } from '@chakra-ui/react';
 
-const Thankyou = () => {
+export default function Thankyou() {
     return (
         <>
-            <Stack
-                bg={useColorModeValue('gray.50', 'gray.700')}
-                rounded={'xl'}
-                spacing={{ base: 8 }}
-                height={"lg"}
-                p={2}
-                maxW={"full"}>
-                <h1>Thank you</h1>
-            </Stack>
+            <Container maxW={'3xl'} maxH={'lg'}>
+                <Stack
+                    as={Box}
+                    textAlign={'center'}
+                    spacing={{ base: 8, md: 14 }}
+                    py={{ base: 20, md: 36 }}>
+                    <Heading
+                        fontWeight={600}
+                        fontSize={{ base: '2xl', sm: '4xl', md: '6xl' }}
+                        lineHeight={'110%'}>
+                        <Text as={'span'} color={'green.400'}>
+                            Thank you
+                        </Text>
+                    </Heading>
+                </Stack>
+            </Container >
         </>
-    )
+    );
 }
-
-export default Thankyou

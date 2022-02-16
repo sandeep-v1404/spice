@@ -115,7 +115,7 @@ const Home = () => {
                     px={useBreakpointValue({ base: 4, md: 8 })}
                     bgGradient={'linear(to-r, blackAlpha.600, transparent)'}>
                     <Stack maxW={'2xl'} align={'center'} spacing={6}>
-                        <Heading as="h1">SPICE 2022</Heading>
+                        <Heading as="h1" color={"white"}>SPICE 2022</Heading>
                         <Stack direction={'row'}>
                             <Button
                                 onClick={executeScroll}

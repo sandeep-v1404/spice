@@ -8,6 +8,7 @@ import { getResponses, signInCustom } from "../firebase";
 import {
     getAuth, onAuthStateChanged
 } from "firebase/auth";
+
 function SignIn() {
     function validateInput(value) {
         let error;
@@ -65,7 +66,7 @@ function SignIn() {
                                     <FormLabel>Password</FormLabel>
                                     <Input
                                         {...field}
-                                        type="text"
+                                        type="password"
                                         placeholder="Enter your Password"
                                         bg={'gray.100'}
                                         border={0}
@@ -229,7 +230,9 @@ const Dashboard = () => {
                             maxW={{ lg: 'lg' }}>
                             <Stack spacing={4}>
                             </Stack>
-                            <SignIn />
+                            {!user &&
+                                <SignIn />
+                            }
                         </Stack>
                     </Container>
             }

@@ -4,7 +4,6 @@ import {
     Container,
     Text,
     Stack,
-    createIcon,
 } from '@chakra-ui/react';
 
 export default function NotFound() {

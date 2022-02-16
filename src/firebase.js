@@ -40,20 +40,19 @@ export const addResponse = async (object) => {
 export const auth = getAuth();
 
 export const signInCustom = async (email, password) => {
-    const userCredential = await signInWithEmailAndPassword(auth, email, password)
+    await signInWithEmailAndPassword(auth, email, password)
         .catch((error) => {
             const errorCode = error.code;
             const errorMessage = error.message;
             console.log(errorCode, errorMessage);
         });
-    console.log("user " + userCredential.user)
     // Do something with userCredential if you want to
 }
 
 
 export const signOutCustom = async () => {
     await signOut(auth)
-        .catch(err => console.log(err));
+        .catch(err => console.error(err));
 }
 
 export const getCurrentUser = () => auth.currentUser;
