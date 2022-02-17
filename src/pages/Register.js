@@ -44,12 +44,12 @@ function SubmitFormikResponse() {
                 mentorDesignation: "",
                 teamLeaderName: "",
                 teamLeaderEmail: "",
-                mobileNumber: 0,
-                alternateMobileNumber: 0,
+                mobileNumber: "",
+                alternateMobileNumber: "",
                 institutionName: "",
                 city: "",
                 state: "",
-                teamMembers: "Full Name - UG/PG - Department - Year of Study\nEx:\nJohn Doe - UG - CSE - 3rd Year, Donh Joe - UG - ECE - 2nd Year",
+                teamMembers: "",
                 domain: "",
                 projectTitle: "",
                 projectAbstract: "",
@@ -296,12 +296,15 @@ function SubmitFormikResponse() {
                                 <FormControl isInvalid={form.errors.teamMembers && form.touched.teamMembers}>
                                     <FormLabel>Team Members (including Leader)</FormLabel>
                                     <Textarea
-                                        style={{ whiteSpace: "pre-line" }}
+                                        placeholder='Full Name - UG/PG - Department - Year of Study&#10;Ex:&#10;John Doe - UG - CSE - 3rd Year, Donh Joe - UG - ECE - 2nd Year'
                                         {...field}
                                         rows={5}
                                         bg={'gray.100'}
                                         border={0}
                                         color={'gray.500'}
+                                        _placeholder={{
+                                            color: 'gray.500',
+                                        }}
                                     />
                                     <FormErrorMessage>{form.errors.teamMembers}</FormErrorMessage>
                                 </FormControl>
@@ -377,6 +380,9 @@ function SubmitFormikResponse() {
                                         bg={'gray.100'}
                                         border={0}
                                         color={'gray.500'}
+                                        _placeholder={{
+                                            color: 'gray.500',
+                                        }}
                                     />
                                     <FormErrorMessage>{form.errors.projectAbstract}</FormErrorMessage>
                                 </FormControl>

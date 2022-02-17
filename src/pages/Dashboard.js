@@ -28,7 +28,7 @@ function SignIn() {
                 password: "",
             }}
             onSubmit={(values, actions) => {
-                actions.setSubmitting(false);
+                actions.setSubmitting(true);
                 signInCustom(values.email, values.password);
             }}
         >
