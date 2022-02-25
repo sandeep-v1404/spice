@@ -42,9 +42,7 @@ export const auth = getAuth();
 export const signInCustom = async (email, password) => {
     await signInWithEmailAndPassword(auth, email, password)
         .catch((error) => {
-            const errorCode = error.code;
-            const errorMessage = error.message;
-            console.log(errorCode, errorMessage);
+            throw new Error("Invalid Credentialss")
         });
     // Do something with userCredential if you want to
 }

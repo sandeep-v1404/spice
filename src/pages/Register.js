@@ -33,7 +33,7 @@ function SubmitFormikResponse() {
         }
         return error
     }
-
+    const headingColor = useColorModeValue('gray.800', 'white');
     return (
         <Formik
             initialValues={{
@@ -46,9 +46,9 @@ function SubmitFormikResponse() {
                 teamLeaderEmail: "",
                 mobileNumber: "",
                 alternateMobileNumber: "",
-                institutionName: "",
-                city: "",
-                state: "",
+                departmentName: "",
+                year: "",
+                section: "",
                 teamMembers: "",
                 domain: "",
                 projectTitle: "",
@@ -231,14 +231,14 @@ function SubmitFormikResponse() {
                             )}
                         </Field>
 
-                        <Field name='institutionName' validate={validateInput}>
+                        <Field name='departmentName' validate={validateInput}>
                             {({ field, form }) => (
-                                <FormControl isInvalid={form.errors.institutionName && form.touched.institutionName}>
-                                    <FormLabel>Institution Name</FormLabel>
+                                <FormControl isInvalid={form.errors.departmentName && form.touched.departmentName}>
+                                    <FormLabel>Department</FormLabel>
                                     <Input
                                         {...field}
                                         type={'text'}
-                                        placeholder="Enter your Institution Name"
+                                        placeholder="Enter your Department Name"
                                         bg={'gray.100'}
                                         border={0}
                                         color={'gray.500'}
@@ -246,20 +246,20 @@ function SubmitFormikResponse() {
                                             color: 'gray.500',
                                         }}
                                     />
-                                    <FormErrorMessage>{form.errors.institutionName}</FormErrorMessage>
+                                    <FormErrorMessage>{form.errors.departmentName}</FormErrorMessage>
                                 </FormControl>
                             )}
                         </Field>
 
 
-                        <Field name='city' validate={validateInput}>
+                        <Field name='year' validate={validateInput}>
                             {({ field, form }) => (
-                                <FormControl isInvalid={form.errors.city && form.touched.city}>
-                                    <FormLabel>City/Town</FormLabel>
+                                <FormControl isInvalid={form.errors.year && form.touched.year}>
+                                    <FormLabel>Year</FormLabel>
                                     <Input
                                         {...field}
                                         type={"text"}
-                                        placeholder="Enter your City/Town Name"
+                                        placeholder="Enter Year"
                                         bg={'gray.100'}
                                         border={0}
                                         color={'gray.500'}
@@ -267,19 +267,19 @@ function SubmitFormikResponse() {
                                             color: 'gray.500',
                                         }}
                                     />
-                                    <FormErrorMessage>{form.errors.city}</FormErrorMessage>
+                                    <FormErrorMessage>{form.errors.year}</FormErrorMessage>
                                 </FormControl>
                             )}
                         </Field>
 
-                        <Field name='state' validate={validateInput}>
+                        <Field name='section' validate={validateInput}>
                             {({ field, form }) => (
-                                <FormControl isInvalid={form.errors.state && form.touched.state}>
-                                    <FormLabel>State</FormLabel>
+                                <FormControl isInvalid={form.errors.section && form.touched.section}>
+                                    <FormLabel>Section</FormLabel>
                                     <Input
                                         {...field}
                                         type={"text"}
-                                        placeholder="Enter the Name of your State"
+                                        placeholder="Enter your Section"
                                         bg={'gray.100'}
                                         border={0}
                                         color={'gray.500'}
@@ -287,7 +287,7 @@ function SubmitFormikResponse() {
                                             color: 'gray.500',
                                         }}
                                     />
-                                    <FormErrorMessage>{form.errors.state}</FormErrorMessage>
+                                    <FormErrorMessage>{form.errors.section}</FormErrorMessage>
                                 </FormControl>
                             )}
                         </Field>
@@ -311,7 +311,7 @@ function SubmitFormikResponse() {
                             )}
                         </Field>
                         <Heading
-                            color={'gray.800'}
+                            color={headingColor}
                             lineHeight={1.1}
                             fontSize={{ base: '2xl', sm: '2xl', md: '3xl' }}>
                             Abstract Details
@@ -434,7 +434,7 @@ export default function Register() {
                     maxW={{ lg: 'lg' }}>
                     <Stack spacing={4}>
                         <Heading
-                            color={'gray.800'}
+                            color={useColorModeValue('gray.800', 'white')}
                             lineHeight={1.1}
                             fontSize={{ base: '2xl', sm: '2xl', md: '3xl' }}>
                             Abstract Submission Details

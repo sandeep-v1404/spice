@@ -11,10 +11,12 @@ import Register from './pages/Register';
 import NotFound from './pages/NotFound';
 import Dashboard from './pages/Dashboard';
 import Thankyou from './pages/Thankyou';
+import ScrollToTop from './utils/ScrollToTop';
 
 function App() {
   return (
     <Router>
+      <ScrollToTop />
       <ChakraProvider theme={theme}>
         <Navbar />
         <Routes>
