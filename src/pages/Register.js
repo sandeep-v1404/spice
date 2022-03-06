@@ -10,16 +10,36 @@ import {
     HStack,
     useBreakpointValue,
     Icon,
+    Image,
     FormControl,
     FormLabel,
     useColorModeValue,
     Select,
+    Show,
     FormErrorMessage,
     Textarea,
+    useDisclosure,
+    ModalOverlay,
+    ModalContent,
+    Modal
 } from '@chakra-ui/react';
 import { Form, Formik, Field, } from "formik";
 import { useNavigate } from 'react-router-dom';
-import { addResponse } from "../firebase"
+import { addResponse } from "../firebase";
+import React from 'react';
+import { TestmonialCard } from '../components/TestmonialCard';
+
+const testimonials = [
+    {
+        heading: "Project Mania",
+        content: "A Project Competition for II Yr / III Yr / IV Yr Students"
+    },
+    {
+        heading: "TechCanvas",
+        content: "Poster Competition for II Yr / III Yr / IV Yr Students"
+    },
+];
+
 function SubmitFormikResponse() {
     let navigate = useNavigate();
 
@@ -410,9 +430,29 @@ function SubmitFormikResponse() {
 }
 
 export default function Register() {
-
+    const { isOpen, onClose } = useDisclosure({defaultIsOpen: true})
+    const finalRef = React.useRef()
     return (
         <Box position={'relative'}>
+            <Modal closeOnEsc={false} closeOnOverlayClick={false} isCentered finalFocusRef={finalRef} defaultIsOpen={false} isOpen={isOpen} onClose={onClose} size="6xl">
+                <ModalOverlay 
+                    bg='blackAlpha.300'
+                    backdropFilter='blur(5px)'/>
+                <ModalContent bg={useColorModeValue('whiteAlpha.700', 'blackAlpha.700')}>
+                    <SimpleGrid
+                        columns={{ base: 1, xl: 2 }}
+                        spacing={'20'}
+                        mt={20}
+                        mb={20}
+                        mx={'auto'}>
+                        {testimonials.map((cardInfo, index) => (
+                            <Box onClick={onClose}>
+                                <TestmonialCard {...cardInfo} key={index} index={index} />
+                            </Box>
+                            ))}
+                    </SimpleGrid>
+                </ModalContent>
+            </Modal>
             <Container
                 as={SimpleGrid}
                 maxW={'7xl'}
@@ -425,6 +465,16 @@ export default function Register() {
                         fontSize={{ base: '3xl', sm: '4xl', md: '5xl', lg: '6xl' }}>
                         Register Now!
                     </Heading>
+                    <Show above='md'>
+                        <Image
+                            borderRadius="lg"
+                            src={
+                                useColorModeValue('https://imgur.com/34UotQV.gif','https://imgur.com/Cx3CLSa.gif')
+                            }
+                            alt="timeline path"
+                            objectFit="contain"
+                            />
+                    </Show>
                 </Stack>
                 <Stack
                     bg={useColorModeValue('gray.50', 'gray.700')}

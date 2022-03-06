@@ -45,17 +45,17 @@ const Home = () => {
                 w={'full'}
                 h={'100vh'}
                 backgroundImage={
-                    'url(https://images.unsplash.com/photo-1600267175161-cfaa711b4a81?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80)'
+                    'url(https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80)'
                 }
                 backgroundSize={'cover'}
                 backgroundPosition={'center center'}>
                 <VStack
-                    w={'full'}
+                    w={''}
                     justify={'center'}
                     px={useBreakpointValue({ base: 4, md: 8 })}
-                    bgGradient={'linear(to-r, blackAlpha.600, transparent)'}>
+                    bgGradient={'linear(to-r, blackAlpha.800, transparent)'}>
                     <Stack maxW={'2xl'} align={'center'} spacing={6}>
-                        <Heading as="h1" color={"white"}>SPICE 2022</Heading>
+                        <Heading isCentered textAlign={'center'} as="h1" color={"white"} fontSize='80px' >SPICE 2K22</Heading>
                         <Stack direction={'row'}>
                             <Button
                                 onClick={executeScroll}
@@ -91,7 +91,7 @@ const Home = () => {
                                 <Image
                                     borderRadius="lg"
                                     src={
-                                        'https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=800&q=80'
+                                        'https://cdn.discordapp.com/attachments/786860090841366538/950015369110757417/1c_fiB-YgbnMl6nntYGBMHQ_1.png'
                                     }
                                     alt="some good alt text"
                                     objectFit="contain"
