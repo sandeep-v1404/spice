@@ -26,7 +26,7 @@ import {
 import { Form, Formik, Field, } from "formik";
 import { useNavigate } from 'react-router-dom';
 import { addResponse } from "../firebase";
-import React from 'react';
+import React, { useState } from 'react';
 import { TestmonialCard } from '../components/TestmonialCard';
 
 const testimonials = [
@@ -40,8 +40,14 @@ const testimonials = [
     },
 ];
 
-function SubmitFormikResponse() {
+
+export default function Register() {
+    const { isOpen, onClose } = useDisclosure({defaultIsOpen: true})
+    const finalRef = React.useRef()
+    const [eventName, setEventName] = useState("Event is not selected");
+
     let navigate = useNavigate();
+
 
     function validateInput(value) {
         let error;
@@ -54,384 +60,8 @@ function SubmitFormikResponse() {
         return error
     }
     const headingColor = useColorModeValue('gray.800', 'white');
-    return (
-        <Formik
-            initialValues={{
-                teamName: '',
-                teamSize: 0,
-                graduationType: "",
-                mentorName: "",
-                mentorDesignation: "",
-                teamLeaderName: "",
-                teamLeaderEmail: "",
-                mobileNumber: "",
-                alternateMobileNumber: "",
-                departmentName: "",
-                year: "",
-                section: "",
-                teamMembers: "",
-                domain: "",
-                projectTitle: "",
-                projectAbstract: "",
-            }}
-            onSubmit={(values, actions) => {
-                actions.setSubmitting(false);
-                addResponse(values);
-                navigate("/thank-you")
-            }}
-        >
-            {(props) => (
-                <Form>
-                    <Stack spacing={4}>
-                        <HStack>
-                            <Box>
-                                <Field name='teamName' validate={validateInput}>
-                                    {({ field, form }) => (
-                                        <FormControl isInvalid={form.errors.teamName && form.touched.teamName}>
-                                            <FormLabel htmlFor='teamName'>Team Name</FormLabel>
-                                            <Input
-                                                {...field}
-                                                id="teamName"
-                                                bg={'gray.100'}
-                                                type="text"
-                                                border={0}
-                                                color={'gray.500'} />
-                                            <FormErrorMessage>{form.errors.teamName}</FormErrorMessage>
-                                        </FormControl>
-                                    )}
-                                </Field>
-                            </Box>
-                            <Box>
-                                <Field name='teamSize' validate={validateInput}>
-                                    {({ field, form }) => (
-                                        <FormControl isInvalid={form.errors.teamSize && form.touched.teamSize}>
-                                            <FormLabel>Team Size</FormLabel>
-                                            <Input
-                                                {...field}
-                                                type="number"
-                                                bg={'gray.100'}
-                                                placeholder="Enter Team's Size"
-                                                border={0}
-                                                color={'gray.500'} />
-                                            <FormErrorMessage>{form.errors.teamSize}</FormErrorMessage>
-                                        </FormControl>
-                                    )}
-                                </Field>
-                            </Box>
-                        </HStack>
-                        <Field name='graduationType' validate={validateInput}>
-                            {({ field, form }) => (
-                                <FormControl isInvalid={form.errors.graduationType && form.touched.graduationType}>
-                                    <FormLabel>UG/PG</FormLabel>
-                                    <Select
-                                        {...field}
-                                        border={0}
-                                        bg={'gray.100'}
-                                        color={'gray.500'}
-                                        placeholder='Select option'>
-                                        <option value='UG'>UG</option>
-                                        <option value='PG'>PG</option>
-                                    </Select>
-                                    <FormErrorMessage>{form.errors.graduationType}</FormErrorMessage>
-                                </FormControl>
-                            )}
-                        </Field>
-                        <Field name='mentorName' validate={validateInput}>
-                            {({ field, form }) => (
-                                <FormControl isInvalid={form.errors.mentorName && form.touched.mentorName}>
-                                    <FormLabel>Mentor Name</FormLabel>
-                                    <Input
-                                        {...field}
-                                        type="text"
-                                        placeholder="Enter your Faculty Mentor Name"
-                                        bg={'gray.100'}
-                                        border={0}
-                                        color={'gray.500'}
-                                        _placeholder={{
-                                            color: 'gray.500',
-                                        }}
-                                    />
-                                    <FormErrorMessage>{form.errors.mentorName}</FormErrorMessage>
-                                </FormControl>
-                            )}
-                        </Field>
-                        <Field name='mentorDesignation' validate={validateInput}>
-                            {({ field, form }) => (
-                                <FormControl isInvalid={form.errors.mentorDesignation && form.touched.mentorDesignation}>
-                                    <FormLabel>Mentor Designation</FormLabel>
-                                    <Input
-                                        {...field}
-                                        type="text"
-                                        placeholder="Enter your Mentor Designation"
-                                        bg={'gray.100'}
-                                        border={0}
-                                        color={'gray.500'}
-                                        _placeholder={{
-                                            color: 'gray.500',
-                                        }}
-                                    />
-                                    <FormErrorMessage>{form.errors.mentorDesignation}</FormErrorMessage>
-                                </FormControl>
-                            )}
-                        </Field>
-                        <Field name='teamLeaderName' validate={validateInput}>
-                            {({ field, form }) => (
-                                <FormControl isInvalid={form.errors.teamLeaderName && form.touched.teamLeaderName}>
-                                    <FormLabel>Team Leader's Name</FormLabel>
-                                    <Input
-                                        {...field}
-                                        type="text"
-                                        placeholder="Enter Team Leader's Name"
-                                        bg={'gray.100'}
-                                        border={0}
-                                        color={'gray.500'}
-                                        _placeholder={{
-                                            color: 'gray.500',
-                                        }}
-                                    />
-                                    <FormErrorMessage>{form.errors.teamLeaderName}</FormErrorMessage>
-                                </FormControl>
-                            )}
-                        </Field>
-                        <Field name='teamLeaderEmail' validate={validateInput}>
-                            {({ field, form }) => (
-                                <FormControl isInvalid={form.errors.teamLeaderEmail && form.touched.teamLeaderEmail}>
-                                    <FormLabel>Team Leader's Email ID</FormLabel>
-                                    <Input
-                                        {...field}
-                                        type={"email"}
-                                        placeholder="Enter Team Leader's EmailID"
-                                        bg={'gray.100'}
-                                        border={0}
-                                        color={'gray.500'}
-                                        _placeholder={{
-                                            color: 'gray.500',
-                                        }}
-                                    />
-                                    <FormErrorMessage>{form.errors.teamLeaderEmail}</FormErrorMessage>
-                                </FormControl>
-                            )}
-                        </Field>
-                        <Field name='mobileNumber' validate={validateInput}>
-                            {({ field, form }) => (
-                                <FormControl isInvalid={form.errors.mobileNumber && form.touched.mobileNumber}>
-                                    <FormLabel>Mobile Number</FormLabel>
-                                    <Input
-                                        {...field}
-                                        type={'number'}
-                                        placeholder="Enter Mobile Number"
-                                        bg={'gray.100'}
-                                        border={0}
-                                        color={'gray.500'}
-                                        _placeholder={{
-                                            color: 'gray.500',
-                                        }}
-                                    />
-                                    <FormErrorMessage>{form.errors.mobileNumber}</FormErrorMessage>
-                                </FormControl>
-                            )}
-                        </Field>
-                        <Field name='alternateMobileNumber' validate={validateInput}>
-                            {({ field, form }) => (
-                                <FormControl isInvalid={form.errors.alternateMobileNumber && form.touched.alternateMobileNumber}>
-                                    <FormLabel>Alternate Mobile Number</FormLabel>
-                                    <Input
-                                        {...field}
-                                        type={'number'}
-                                        placeholder="Enter Mobile Number"
-                                        bg={'gray.100'}
-                                        border={0}
-                                        color={'gray.500'}
-                                        _placeholder={{
-                                            color: 'gray.500',
-                                        }}
-                                    />
-                                    <FormErrorMessage>{form.errors.alternateMobileNumber}</FormErrorMessage>
-                                </FormControl>
-                            )}
-                        </Field>
+    
 
-                        <Field name='departmentName' validate={validateInput}>
-                            {({ field, form }) => (
-                                <FormControl isInvalid={form.errors.departmentName && form.touched.departmentName}>
-                                    <FormLabel>Department</FormLabel>
-                                    <Input
-                                        {...field}
-                                        type={'text'}
-                                        placeholder="Enter your Department Name"
-                                        bg={'gray.100'}
-                                        border={0}
-                                        color={'gray.500'}
-                                        _placeholder={{
-                                            color: 'gray.500',
-                                        }}
-                                    />
-                                    <FormErrorMessage>{form.errors.departmentName}</FormErrorMessage>
-                                </FormControl>
-                            )}
-                        </Field>
-
-
-                        <Field name='year' validate={validateInput}>
-                            {({ field, form }) => (
-                                <FormControl isInvalid={form.errors.year && form.touched.year}>
-                                    <FormLabel>Year</FormLabel>
-                                    <Input
-                                        {...field}
-                                        type={"text"}
-                                        placeholder="Enter Year"
-                                        bg={'gray.100'}
-                                        border={0}
-                                        color={'gray.500'}
-                                        _placeholder={{
-                                            color: 'gray.500',
-                                        }}
-                                    />
-                                    <FormErrorMessage>{form.errors.year}</FormErrorMessage>
-                                </FormControl>
-                            )}
-                        </Field>
-
-                        <Field name='section' validate={validateInput}>
-                            {({ field, form }) => (
-                                <FormControl isInvalid={form.errors.section && form.touched.section}>
-                                    <FormLabel>Section</FormLabel>
-                                    <Input
-                                        {...field}
-                                        type={"text"}
-                                        placeholder="Enter your Section"
-                                        bg={'gray.100'}
-                                        border={0}
-                                        color={'gray.500'}
-                                        _placeholder={{
-                                            color: 'gray.500',
-                                        }}
-                                    />
-                                    <FormErrorMessage>{form.errors.section}</FormErrorMessage>
-                                </FormControl>
-                            )}
-                        </Field>
-                        <Field name='teamMembers' validate={validateInput}>
-                            {({ field, form }) => (
-                                <FormControl isInvalid={form.errors.teamMembers && form.touched.teamMembers}>
-                                    <FormLabel>Team Members (including Leader)</FormLabel>
-                                    <Textarea
-                                        placeholder='Full Name - UG/PG - Department - Year of Study&#10;Ex:&#10;John Doe - UG - CSE - 3rd Year, Donh Joe - UG - ECE - 2nd Year'
-                                        {...field}
-                                        rows={5}
-                                        bg={'gray.100'}
-                                        border={0}
-                                        color={'gray.500'}
-                                        _placeholder={{
-                                            color: 'gray.500',
-                                        }}
-                                    />
-                                    <FormErrorMessage>{form.errors.teamMembers}</FormErrorMessage>
-                                </FormControl>
-                            )}
-                        </Field>
-                        <Heading
-                            color={headingColor}
-                            lineHeight={1.1}
-                            fontSize={{ base: '2xl', sm: '2xl', md: '3xl' }}>
-                            Abstract Details
-                        </Heading>
-
-
-                        <Field name='domain' validate={validateInput}>
-                            {({ field, form }) => (
-                                <FormControl isInvalid={form.errors.domain && form.touched.domain}>
-                                    <FormLabel>Choose the domain of your Abstract in following Areas</FormLabel>
-                                    <Select
-                                        {...field}
-                                        placeholder='Select option'>
-                                        <option value='Android'>Android</option>
-                                        <option value='Big Data'>Big Data</option>
-                                        <option value='Cloud Computing'>Cloud Computing</option>
-                                        <option value='Data Analytics'>Data Analytics</option>
-                                        <option value='Information Retrieval'>Information Retrieval</option>
-                                        <option value='Cyber Security and Forensics'>Cyber Security and Forensics</option>
-                                        <option value='Image Processing'>Image Processing</option>
-                                        <option value='Distributed Computing'>Distributed Computing</option>
-                                        <option value='Network Security'>Network Security</option>
-                                        <option value='Software Engineering'>Software Engineering</option>
-                                        <option value='Web Services'>Web Services</option>
-                                        <option value='Web Technology'>Web Technology</option>
-                                        <option value='Communication Networks'>Communication Networks</option>
-                                        <option value='Bioinformatics'>Bioinformatics</option>
-                                        <option value='Cognitive computing'>Cognitive computing</option>
-                                        <option value='Wireless Sensor Networks'>Wireless Sensor Networks</option>
-                                        <option value='Internet of Things (IoT)'>Internet of Things (IoT)</option>
-                                        <option value='Embedded Systems'>Embedded Systems</option>
-                                        <option value='Speech Processing'>Speech Processing</option>
-                                        <option value='Video Analytics'>Video Analytics</option>
-                                        <option value='Block-Chain Technologies'>Block-Chain Technologies</option>
-                                    </Select>
-                                    <FormErrorMessage>{form.errors.domain}</FormErrorMessage>
-                                </FormControl>
-                            )}
-                        </Field>
-
-                        <Field name='projectTitle' validate={validateInput}>
-                            {({ field, form }) => (
-                                <FormControl isInvalid={form.errors.projectTitle && form.touched.projectTitle}>
-                                    <FormLabel>Project Title</FormLabel>
-                                    <Input
-                                        {...field}
-                                        type={"text"}
-                                        bg={'gray.100'}
-                                        border={0}
-                                        color={'gray.500'}
-                                        _placeholder={{
-                                            color: 'gray.500',
-                                        }}
-                                    />
-                                    <FormErrorMessage>{form.errors.projectTitle}</FormErrorMessage>
-                                </FormControl>
-                            )}
-                        </Field>
-
-                        <Field name='projectAbstract' validate={validateInput}>
-                            {({ field, form }) => (
-                                <FormControl isInvalid={form.errors.projectAbstract && form.touched.projectAbstract}>
-                                    <FormLabel>Project Abstract</FormLabel>
-                                    <Textarea
-                                        {...field}
-                                        bg={'gray.100'}
-                                        border={0}
-                                        color={'gray.500'}
-                                        _placeholder={{
-                                            color: 'gray.500',
-                                        }}
-                                    />
-                                    <FormErrorMessage>{form.errors.projectAbstract}</FormErrorMessage>
-                                </FormControl>
-                            )}
-                        </Field>
-                        <Button
-                            type='submit'
-                            isLoading={props.isSubmitting}
-                            fontFamily={'heading'}
-                            mt={8}
-                            w={'full'}
-                            bgGradient="linear(to-r, red.400,pink.400)"
-                            color={'white'}
-                            _hover={{
-                                bgGradient: 'linear(to-r, red.400,pink.400)',
-                                boxShadow: 'xl',
-                            }}>
-                            Submit
-                        </Button>
-                    </Stack>
-                </Form>
-            )}
-        </Formik>
-    )
-}
-
-export default function Register() {
-    const { isOpen, onClose } = useDisclosure({defaultIsOpen: true})
-    const finalRef = React.useRef()
     return (
         <Box position={'relative'}>
             <Modal closeOnEsc={false} closeOnOverlayClick={false} isCentered finalFocusRef={finalRef} defaultIsOpen={false} isOpen={isOpen} onClose={onClose} size="6xl">
@@ -446,7 +76,7 @@ export default function Register() {
                         mb={20}
                         mx={'auto'}>
                         {testimonials.map((cardInfo, index) => (
-                            <Box onClick={onClose}>
+                            <Box onClick={()=>{onClose(); setEventName(cardInfo.heading);}} >
                                 <TestmonialCard {...cardInfo} key={index} index={index} />
                             </Box>
                             ))}
@@ -494,7 +124,379 @@ export default function Register() {
                             of our rockstar engineering team and skyrocket your career!
                         </Text>
                     </Stack>
-                    <SubmitFormikResponse></SubmitFormikResponse>
+                    <Formik
+                        initialValues={{
+                            teamName: '',
+                            teamSize: 0,
+                            graduationType: "",
+                            mentorName: "",
+                            mentorDesignation: "",
+                            teamLeaderName: "",
+                            teamLeaderEmail: "",
+                            mobileNumber: "",
+                            alternateMobileNumber: "",
+                            departmentName: "",
+                            year: "",
+                            section: "",
+                            teamMembers: "",
+                            domain: "",
+                            projectTitle: "",
+                            projectAbstract: "",
+                            eventName: "",
+                        }}
+                        onSubmit={(values, actions) => {
+                            actions.setSubmitting(false);
+                            values.eventName = eventName;
+                            addResponse(values);
+                            navigate("/thank-you")
+                        }}
+                    >
+                        {(props) => (
+                            <Form>
+                                <Stack spacing={4}>
+                                    <HStack>
+                                        <Box>
+                                            <Field name='teamName' validate={validateInput}>
+                                                {({ field, form }) => (
+                                                    <FormControl isInvalid={form.errors.teamName && form.touched.teamName}>
+                                                        <FormLabel htmlFor='teamName'>Team Name</FormLabel>
+                                                        <Input
+                                                            {...field}
+                                                            id="teamName"
+                                                            bg={'gray.100'}
+                                                            type="text"
+                                                            border={0}
+                                                            color={'gray.500'} />
+                                                        <FormErrorMessage>{form.errors.teamName}</FormErrorMessage>
+                                                    </FormControl>
+                                                )}
+                                            </Field>
+                                        </Box>
+                                        <Box>
+                                            <Field name='teamSize' validate={validateInput}>
+                                                {({ field, form }) => (
+                                                    <FormControl isInvalid={form.errors.teamSize && form.touched.teamSize}>
+                                                        <FormLabel>Team Size</FormLabel>
+                                                        <Input
+                                                            {...field}
+                                                            type="number"
+                                                            bg={'gray.100'}
+                                                            placeholder="Enter Team's Size"
+                                                            border={0}
+                                                            color={'gray.500'} />
+                                                        <FormErrorMessage>{form.errors.teamSize}</FormErrorMessage>
+                                                    </FormControl>
+                                                )}
+                                            </Field>
+                                        </Box>
+                                    </HStack>
+                                    <Field name='graduationType' validate={validateInput}>
+                                        {({ field, form }) => (
+                                            <FormControl isInvalid={form.errors.graduationType && form.touched.graduationType}>
+                                                <FormLabel>UG/PG</FormLabel>
+                                                <Select
+                                                    {...field}
+                                                    border={0}
+                                                    bg={'gray.100'}
+                                                    color={'gray.500'}
+                                                    placeholder='Select option'>
+                                                    <option value='UG'>UG</option>
+                                                    <option value='PG'>PG</option>
+                                                </Select>
+                                                <FormErrorMessage>{form.errors.graduationType}</FormErrorMessage>
+                                            </FormControl>
+                                        )}
+                                    </Field>
+                                    <Field name='mentorName' validate={validateInput}>
+                                        {({ field, form }) => (
+                                            <FormControl isInvalid={form.errors.mentorName && form.touched.mentorName}>
+                                                <FormLabel>Mentor Name</FormLabel>
+                                                <Input
+                                                    {...field}
+                                                    type="text"
+                                                    placeholder="Enter your Faculty Mentor Name"
+                                                    bg={'gray.100'}
+                                                    border={0}
+                                                    color={'gray.500'}
+                                                    _placeholder={{
+                                                        color: 'gray.500',
+                                                    }}
+                                                />
+                                                <FormErrorMessage>{form.errors.mentorName}</FormErrorMessage>
+                                            </FormControl>
+                                        )}
+                                    </Field>
+                                    <Field name='mentorDesignation' validate={validateInput}>
+                                        {({ field, form }) => (
+                                            <FormControl isInvalid={form.errors.mentorDesignation && form.touched.mentorDesignation}>
+                                                <FormLabel>Mentor Designation</FormLabel>
+                                                <Input
+                                                    {...field}
+                                                    type="text"
+                                                    placeholder="Enter your Mentor Designation"
+                                                    bg={'gray.100'}
+                                                    border={0}
+                                                    color={'gray.500'}
+                                                    _placeholder={{
+                                                        color: 'gray.500',
+                                                    }}
+                                                />
+                                                <FormErrorMessage>{form.errors.mentorDesignation}</FormErrorMessage>
+                                            </FormControl>
+                                        )}
+                                    </Field>
+                                    <Field name='teamLeaderName' validate={validateInput}>
+                                        {({ field, form }) => (
+                                            <FormControl isInvalid={form.errors.teamLeaderName && form.touched.teamLeaderName}>
+                                                <FormLabel>Team Leader's Name</FormLabel>
+                                                <Input
+                                                    {...field}
+                                                    type="text"
+                                                    placeholder="Enter Team Leader's Name"
+                                                    bg={'gray.100'}
+                                                    border={0}
+                                                    color={'gray.500'}
+                                                    _placeholder={{
+                                                        color: 'gray.500',
+                                                    }}
+                                                />
+                                                <FormErrorMessage>{form.errors.teamLeaderName}</FormErrorMessage>
+                                            </FormControl>
+                                        )}
+                                    </Field>
+                                    <Field name='teamLeaderEmail' validate={validateInput}>
+                                        {({ field, form }) => (
+                                            <FormControl isInvalid={form.errors.teamLeaderEmail && form.touched.teamLeaderEmail}>
+                                                <FormLabel>Team Leader's Email ID</FormLabel>
+                                                <Input
+                                                    {...field}
+                                                    type={"email"}
+                                                    placeholder="Enter Team Leader's EmailID"
+                                                    bg={'gray.100'}
+                                                    border={0}
+                                                    color={'gray.500'}
+                                                    _placeholder={{
+                                                        color: 'gray.500',
+                                                    }}
+                                                />
+                                                <FormErrorMessage>{form.errors.teamLeaderEmail}</FormErrorMessage>
+                                            </FormControl>
+                                        )}
+                                    </Field>
+                                    <Field name='mobileNumber' validate={validateInput}>
+                                        {({ field, form }) => (
+                                            <FormControl isInvalid={form.errors.mobileNumber && form.touched.mobileNumber}>
+                                                <FormLabel>Mobile Number</FormLabel>
+                                                <Input
+                                                    {...field}
+                                                    type={'number'}
+                                                    placeholder="Enter Mobile Number"
+                                                    bg={'gray.100'}
+                                                    border={0}
+                                                    color={'gray.500'}
+                                                    _placeholder={{
+                                                        color: 'gray.500',
+                                                    }}
+                                                />
+                                                <FormErrorMessage>{form.errors.mobileNumber}</FormErrorMessage>
+                                            </FormControl>
+                                        )}
+                                    </Field>
+                                    <Field name='alternateMobileNumber' validate={validateInput}>
+                                        {({ field, form }) => (
+                                            <FormControl isInvalid={form.errors.alternateMobileNumber && form.touched.alternateMobileNumber}>
+                                                <FormLabel>Alternate Mobile Number</FormLabel>
+                                                <Input
+                                                    {...field}
+                                                    type={'number'}
+                                                    placeholder="Enter Mobile Number"
+                                                    bg={'gray.100'}
+                                                    border={0}
+                                                    color={'gray.500'}
+                                                    _placeholder={{
+                                                        color: 'gray.500',
+                                                    }}
+                                                />
+                                                <FormErrorMessage>{form.errors.alternateMobileNumber}</FormErrorMessage>
+                                            </FormControl>
+                                        )}
+                                    </Field>
+
+                                    <Field name='departmentName' validate={validateInput}>
+                                        {({ field, form }) => (
+                                            <FormControl isInvalid={form.errors.departmentName && form.touched.departmentName}>
+                                                <FormLabel>Department</FormLabel>
+                                                <Input
+                                                    {...field}
+                                                    type={'text'}
+                                                    placeholder="Enter your Department Name"
+                                                    bg={'gray.100'}
+                                                    border={0}
+                                                    color={'gray.500'}
+                                                    _placeholder={{
+                                                        color: 'gray.500',
+                                                    }}
+                                                />
+                                                <FormErrorMessage>{form.errors.departmentName}</FormErrorMessage>
+                                            </FormControl>
+                                        )}
+                                    </Field>
+
+
+                                    <Field name='year' validate={validateInput}>
+                                        {({ field, form }) => (
+                                            <FormControl isInvalid={form.errors.year && form.touched.year}>
+                                                <FormLabel>Year</FormLabel>
+                                                <Input
+                                                    {...field}
+                                                    type={"text"}
+                                                    placeholder="Enter Year"
+                                                    bg={'gray.100'}
+                                                    border={0}
+                                                    color={'gray.500'}
+                                                    _placeholder={{
+                                                        color: 'gray.500',
+                                                    }}
+                                                />
+                                                <FormErrorMessage>{form.errors.year}</FormErrorMessage>
+                                            </FormControl>
+                                        )}
+                                    </Field>
+
+                                    <Field name='section' validate={validateInput}>
+                                        {({ field, form }) => (
+                                            <FormControl isInvalid={form.errors.section && form.touched.section}>
+                                                <FormLabel>Section</FormLabel>
+                                                <Input
+                                                    {...field}
+                                                    type={"text"}
+                                                    placeholder="Enter your Section"
+                                                    bg={'gray.100'}
+                                                    border={0}
+                                                    color={'gray.500'}
+                                                    _placeholder={{
+                                                        color: 'gray.500',
+                                                    }}
+                                                />
+                                                <FormErrorMessage>{form.errors.section}</FormErrorMessage>
+                                            </FormControl>
+                                        )}
+                                    </Field>
+                                    <Field name='teamMembers' validate={validateInput}>
+                                        {({ field, form }) => (
+                                            <FormControl isInvalid={form.errors.teamMembers && form.touched.teamMembers}>
+                                                <FormLabel>Team Members (including Leader)</FormLabel>
+                                                <Textarea
+                                                    placeholder='Full Name - UG/PG - Department - Year of Study&#10;Ex:&#10;John Doe - UG - CSE - 3rd Year, Donh Joe - UG - ECE - 2nd Year'
+                                                    {...field}
+                                                    rows={5}
+                                                    bg={'gray.100'}
+                                                    border={0}
+                                                    color={'gray.500'}
+                                                    _placeholder={{
+                                                        color: 'gray.500',
+                                                    }}
+                                                />
+                                                <FormErrorMessage>{form.errors.teamMembers}</FormErrorMessage>
+                                            </FormControl>
+                                        )}
+                                    </Field>
+                                    <Heading
+                                        color={headingColor}
+                                        lineHeight={1.1}
+                                        fontSize={{ base: '2xl', sm: '2xl', md: '3xl' }}>
+                                        Abstract Details
+                                    </Heading>
+
+
+                                    <Field name='domain' validate={validateInput}>
+                                        {({ field, form }) => (
+                                            <FormControl isInvalid={form.errors.domain && form.touched.domain}>
+                                                <FormLabel>Choose the domain of your Abstract in following Areas</FormLabel>
+                                                <Select
+                                                    {...field}
+                                                    placeholder='Select option'>
+                                                    <option value='Android'>Android</option>
+                                                    <option value='Big Data'>Big Data</option>
+                                                    <option value='Cloud Computing'>Cloud Computing</option>
+                                                    <option value='Data Analytics'>Data Analytics</option>
+                                                    <option value='Information Retrieval'>Information Retrieval</option>
+                                                    <option value='Cyber Security and Forensics'>Cyber Security and Forensics</option>
+                                                    <option value='Image Processing'>Image Processing</option>
+                                                    <option value='Distributed Computing'>Distributed Computing</option>
+                                                    <option value='Network Security'>Network Security</option>
+                                                    <option value='Software Engineering'>Software Engineering</option>
+                                                    <option value='Web Services'>Web Services</option>
+                                                    <option value='Web Technology'>Web Technology</option>
+                                                    <option value='Communication Networks'>Communication Networks</option>
+                                                    <option value='Bioinformatics'>Bioinformatics</option>
+                                                    <option value='Cognitive computing'>Cognitive computing</option>
+                                                    <option value='Wireless Sensor Networks'>Wireless Sensor Networks</option>
+                                                    <option value='Internet of Things (IoT)'>Internet of Things (IoT)</option>
+                                                    <option value='Embedded Systems'>Embedded Systems</option>
+                                                    <option value='Speech Processing'>Speech Processing</option>
+                                                    <option value='Video Analytics'>Video Analytics</option>
+                                                    <option value='Block-Chain Technologies'>Block-Chain Technologies</option>
+                                                </Select>
+                                                <FormErrorMessage>{form.errors.domain}</FormErrorMessage>
+                                            </FormControl>
+                                        )}
+                                    </Field>
+
+                                    <Field name='projectTitle' validate={validateInput}>
+                                        {({ field, form }) => (
+                                            <FormControl isInvalid={form.errors.projectTitle && form.touched.projectTitle}>
+                                                <FormLabel>Project Title</FormLabel>
+                                                <Input
+                                                    {...field}
+                                                    type={"text"}
+                                                    bg={'gray.100'}
+                                                    border={0}
+                                                    color={'gray.500'}
+                                                    _placeholder={{
+                                                        color: 'gray.500',
+                                                    }}
+                                                />
+                                                <FormErrorMessage>{form.errors.projectTitle}</FormErrorMessage>
+                                            </FormControl>
+                                        )}
+                                    </Field>
+
+                                    <Field name='projectAbstract' validate={validateInput}>
+                                        {({ field, form }) => (
+                                            <FormControl isInvalid={form.errors.projectAbstract && form.touched.projectAbstract}>
+                                                <FormLabel>Project Abstract</FormLabel>
+                                                <Textarea
+                                                    {...field}
+                                                    bg={'gray.100'}
+                                                    border={0}
+                                                    color={'gray.500'}
+                                                    _placeholder={{
+                                                        color: 'gray.500',
+                                                    }}
+                                                />
+                                                <FormErrorMessage>{form.errors.projectAbstract}</FormErrorMessage>
+                                            </FormControl>
+                                        )}
+                                    </Field>
+                                    <Button
+                                        type='submit'
+                                        isLoading={props.isSubmitting}
+                                        fontFamily={'heading'}
+                                        mt={8}
+                                        w={'full'}
+                                        bgGradient="linear(to-r, red.400,pink.400)"
+                                        color={'white'}
+                                        _hover={{
+                                            bgGradient: 'linear(to-r, red.400,pink.400)',
+                                            boxShadow: 'xl',
+                                        }}>
+                                        Submit
+                                    </Button>
+                                </Stack>
+                            </Form>
+                        )}
+                    </Formik>
                 </Stack>
             </Container>
             <Blur

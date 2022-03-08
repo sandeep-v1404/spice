@@ -122,7 +122,7 @@ const Dashboard = () => {
             }
         });
     }, [user]);
-
+    
     const columns = [
         {
             name: 'Team Name',
@@ -228,6 +228,12 @@ const Dashboard = () => {
             sortable: true,
             wrap: true
         },
+        {
+            name: 'Event Name',
+            selector: row => row.eventName,
+            sortable: true,
+            wrap: true
+        },
     ];
 
     const [responses, setResponses] = useState([]);
@@ -278,11 +284,12 @@ const Dashboard = () => {
                         bg={bgColor}
                         rounded={'xl'}
                         spacing={{ base: 8 }}
-                        height={"lg"}
+                        height={"100%"}
                         maxW={"full"}>
                         <DataTable
                             columns={columns}
                             data={filteredItems}
+                            
                             defaultSortField="name"
                             striped
                             pagination
