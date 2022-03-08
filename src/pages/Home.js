@@ -125,7 +125,8 @@ const Home = () => {
                             as="p"
                             marginTop="2"
                             color={useColorModeValue('gray.700', 'gray.200')}
-                            fontSize="lg">
+                            fontSize="lg"
+                            align="justify">
                             Sathyabama Project Innovation Competition and Exhibition
                             (SPICE 2022) is a Inter-Departmental Project Competition for
                             CSE and IT Students, organized by Sathyabama Institute of
