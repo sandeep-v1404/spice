@@ -13,7 +13,7 @@ export function TestmonialCard({ heading, content }) {
             p={10}
             justifyContent={'space-between'}
             position={'relative'}
-            bg={useColorModeValue('white', 'gray.900')}
+            bg={useColorModeValue('black', 'white')}
             _after={{
                 content: '""',
                 position: 'absolute',
@@ -40,25 +40,30 @@ export function TestmonialCard({ heading, content }) {
 
             }} _hover={{
                 cursor: "pointer",
-                bg: useColorModeValue('gray.100', 'gray.700'),
+                bg: useColorModeValue('#333', '#DDD'),
             }}
             onClick={() => navigate("/register")}>
-            <Flex
+            <Flex        
+                isCentered
                 direction={'column'}
-                textAlign={'left'}
+                textAlign={'center'}
                 justifyContent={'space-between'}>
                 <chakra.h1
                     textAlign={"center"}
                     fontSize={'2xl'}
                     py={2}
-                    fontWeight={'bold'}>
+                    fontWeight={'bold'}
+                    color={useColorModeValue('white', 'black')}
+                    >
                     {heading}
                 </chakra.h1>
                 <chakra.p
                     fontFamily={'Inter'}
+                    textAlign={"center"}
                     fontWeight={'medium'}
                     fontSize={'15px'}
-                    pb={4}>
+                    color={useColorModeValue('whiteAlpha.700', 'blackAlpha.700')}            
+                    pb={2}>
                     {content}
                 </chakra.p>
             </Flex>
