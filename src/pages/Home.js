@@ -11,11 +11,11 @@ import { TestmonialCard } from '../components/TestmonialCard';
 const testimonials = [
     {
         heading: "Project Mania",
-        content: "A Project Competition for II Yr / III Yr / IV Yr Students"
+        content: "A Project Competition for Engineering Students"
     },
     {
         heading: "TechCanvas",
-        content: "Poster Competition for II Yr / III Yr / IV Yr Students"
+        content: "Poster Competition for Engineering Students"
     },
 ];
 
@@ -128,9 +128,7 @@ const Home = () => {
                             fontSize="lg"
                             align="justify">
                             Sathyabama Project Innovation Competition and Exhibition
-                            (SPICE 2022) is a Inter-Departmental Project Competition for
-                            CSE and IT Students, organized by Sathyabama Institute of
-                            Science and Technology to encourage students to apply their
+                            (SPICE 2022) is a Inter-Departmental Project Competition, organized by School of Computing to encourage students to apply their
                             knowledge, skill, passion, and creativity to technology solutions
                             that can make a difference to the world today.
                         </Text>
@@ -173,17 +171,18 @@ const Home = () => {
                 <SimpleGrid columns={{ base: 1, md: 3 }} justifyItems={"center"} spacing={{ base: 2, lg: 8 }}>
                     <StatsCard
                         title={'Prizes'}
-                        desc={"Exciting cash prizes for first, second, third winner and many more consolation prizes."}
+                        desc={"Exciting prizes for first, second, third winner and many more consolation prizes."}
                         icon={<BsPerson size={'3em'} />}
                     />
                     <StatsCard
+                        points={["Participants must be only from the CSE or IT Department.", " Maximum of 3 members per team.", " A Registration fee of ₹100 has to be paid ."]}
                         title={'Eligibility'}
-                        desc={"Participants must be only from the  CSE or IT Department. Maximum of 3 members per team. A Registration fee of ₹100 has to be paid ."}
+                        desc={""}
                         icon={<FiServer size={'3em'} />}
                     />
                     <StatsCard
                         title={'Call for Abstracts'}
-                        desc={"The last date to send your abstracts is March 9, 2022. Candidates will be informed about their selection by March 15, 2022."}
+                        desc={"The last date to send your abstracts is 16-03-2022. Candidates will be informed about their selection by 20-03-2022."}
                         icon={<GoLocation size={'3em'} />}
                     />
                     <StatsCard
@@ -197,7 +196,7 @@ const Home = () => {
     )
 }
 
-function StatsCard({ title, stat, icon, desc }) {
+function StatsCard({ title, stat, icon, desc, points }) {
     return (
         <Stat
             px={{ base: 2, md: 4 }}
@@ -217,6 +216,12 @@ function StatsCard({ title, stat, icon, desc }) {
                     <StatHelpText>
                         {desc}
                     </StatHelpText>
+                    {points && points.map((point, index) =>
+                        <StatHelpText key={index}>
+                            {point}
+                        </StatHelpText>
+                    )
+                    }
                 </Box>
                 <Box
                     my={'auto'}

@@ -42,7 +42,7 @@ const testimonials = [
 
 
 export default function Register() {
-    const { isOpen, onClose } = useDisclosure({defaultIsOpen: true})
+    const { isOpen, onClose } = useDisclosure({ defaultIsOpen: true })
     const finalRef = React.useRef()
     const [eventName, setEventName] = useState("Event is not selected");
 
@@ -60,14 +60,14 @@ export default function Register() {
         return error
     }
     const headingColor = useColorModeValue('gray.800', 'white');
-    
+
 
     return (
         <Box position={'relative'}>
             <Modal closeOnEsc={false} closeOnOverlayClick={false} isCentered finalFocusRef={finalRef} defaultIsOpen={false} isOpen={isOpen} onClose={onClose} size="6xl">
-                <ModalOverlay 
+                <ModalOverlay
                     bg='blackAlpha.300'
-                    backdropFilter='blur(5px)'/>
+                    backdropFilter='blur(5px)' />
                 <ModalContent bg={useColorModeValue('whiteAlpha.700', 'blackAlpha.700')}>
                     <SimpleGrid
                         columns={{ base: 1, xl: 2 }}
@@ -76,10 +76,10 @@ export default function Register() {
                         mb={20}
                         mx={'auto'}>
                         {testimonials.map((cardInfo, index) => (
-                            <Box onClick={()=>{onClose(); setEventName(cardInfo.heading);}} >
+                            <Box onClick={() => { onClose(); setEventName(cardInfo.heading); }} >
                                 <TestmonialCard {...cardInfo} key={index} index={index} />
                             </Box>
-                            ))}
+                        ))}
                     </SimpleGrid>
                 </ModalContent>
             </Modal>
@@ -99,11 +99,11 @@ export default function Register() {
                         <Image
                             borderRadius="lg"
                             src={
-                                useColorModeValue('https://imgur.com/34UotQV.gif','https://imgur.com/Cx3CLSa.gif')
+                                useColorModeValue('https://imgur.com/34UotQV.gif', 'https://imgur.com/Cx3CLSa.gif')
                             }
                             alt="timeline path"
                             objectFit="contain"
-                            />
+                        />
                     </Show>
                 </Stack>
                 <Stack
@@ -117,7 +117,7 @@ export default function Register() {
                             color={useColorModeValue('gray.800', 'white')}
                             lineHeight={1.1}
                             fontSize={{ base: '2xl', sm: '2xl', md: '3xl' }}>
-                            Abstract Submission Details
+                            Submission Details
                         </Heading>
                         <Text color={'gray.500'} fontSize={{ base: 'sm', sm: 'md' }}>
                             We're looking for amazing engineers just like you! Become a part
@@ -130,8 +130,6 @@ export default function Register() {
                             teamSize: 0,
                             graduationType: "",
                             mentorName: "",
-                            mentorDesignation: "",
-                            teamLeaderName: "",
                             teamLeaderEmail: "",
                             mobileNumber: "",
                             alternateMobileNumber: "",
@@ -226,52 +224,14 @@ export default function Register() {
                                             </FormControl>
                                         )}
                                     </Field>
-                                    <Field name='mentorDesignation' validate={validateInput}>
-                                        {({ field, form }) => (
-                                            <FormControl isInvalid={form.errors.mentorDesignation && form.touched.mentorDesignation}>
-                                                <FormLabel>Mentor Designation</FormLabel>
-                                                <Input
-                                                    {...field}
-                                                    type="text"
-                                                    placeholder="Enter your Mentor Designation"
-                                                    bg={'gray.100'}
-                                                    border={0}
-                                                    color={'gray.500'}
-                                                    _placeholder={{
-                                                        color: 'gray.500',
-                                                    }}
-                                                />
-                                                <FormErrorMessage>{form.errors.mentorDesignation}</FormErrorMessage>
-                                            </FormControl>
-                                        )}
-                                    </Field>
-                                    <Field name='teamLeaderName' validate={validateInput}>
-                                        {({ field, form }) => (
-                                            <FormControl isInvalid={form.errors.teamLeaderName && form.touched.teamLeaderName}>
-                                                <FormLabel>Team Leader's Name</FormLabel>
-                                                <Input
-                                                    {...field}
-                                                    type="text"
-                                                    placeholder="Enter Team Leader's Name"
-                                                    bg={'gray.100'}
-                                                    border={0}
-                                                    color={'gray.500'}
-                                                    _placeholder={{
-                                                        color: 'gray.500',
-                                                    }}
-                                                />
-                                                <FormErrorMessage>{form.errors.teamLeaderName}</FormErrorMessage>
-                                            </FormControl>
-                                        )}
-                                    </Field>
                                     <Field name='teamLeaderEmail' validate={validateInput}>
                                         {({ field, form }) => (
                                             <FormControl isInvalid={form.errors.teamLeaderEmail && form.touched.teamLeaderEmail}>
-                                                <FormLabel>Team Leader's Email ID</FormLabel>
+                                                <FormLabel>Team Email ID</FormLabel>
                                                 <Input
                                                     {...field}
                                                     type={"email"}
-                                                    placeholder="Enter Team Leader's EmailID"
+                                                    placeholder="Enter Team EmailID"
                                                     bg={'gray.100'}
                                                     border={0}
                                                     color={'gray.500'}
