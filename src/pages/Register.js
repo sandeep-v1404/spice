@@ -28,6 +28,18 @@ import { useNavigate } from 'react-router-dom';
 import { addResponse } from "../firebase";
 import React, { useState } from 'react';
 import { TestmonialCard } from '../components/TestmonialCard';
+import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
+
+function makeRandomString(length) {
+    var result = '';
+    var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    var charactersLength = characters.length;
+    for (var i = 0; i < length; i++) {
+        result += characters.charAt(Math.floor(Math.random() *
+            charactersLength));
+    }
+    return result;
+}
 
 const testimonials = [
     {
@@ -45,9 +57,52 @@ export default function Register() {
     const { isOpen, onClose } = useDisclosure({ defaultIsOpen: true })
     const finalRef = React.useRef()
     const [eventName, setEventName] = useState("Event is not selected");
-
+    const [file, setFile] = useState('');
+    const [buttonState, setbuttonState] = useState(true);
+    const [imageUrl, setImageUrl] = useState('');
     let navigate = useNavigate();
+    const storage = getStorage();
 
+    const storageRef = ref(storage, makeRandomString(12));
+
+    function getImageLink() {
+        getDownloadURL(storageRef)
+            .then((url) => {
+                setImageUrl(url);
+            })
+            .catch((error) => {
+                console.log(error);
+                switch (error.code) {
+                    case 'storage/object-not-found':
+                        // File doesn't exist
+                        break;
+                    case 'storage/unauthorized':
+                        // User doesn't have permission to access the object
+                        break;
+                    case 'storage/canceled':
+                        // User canceled the upload
+                        break;
+
+                    // ...
+
+                    case 'storage/unknown':
+                        // Unknown error occurred, inspect the server response
+                        break;
+                }
+            });
+    }
+
+    const upload = () => {
+        if (file == null)
+            return;
+        uploadBytes(storageRef, file).then((snapshot) => {
+            console.log('Uploaded a blob or file!');
+            console.log(snapshot);
+            getImageLink();
+            setbuttonState(false)
+        });
+
+    }
 
     function validateInput(value) {
         let error;
@@ -60,7 +115,6 @@ export default function Register() {
         return error
     }
     const headingColor = useColorModeValue('gray.800', 'white');
-
 
     return (
         <Box position={'relative'}>
@@ -105,6 +159,7 @@ export default function Register() {
                             objectFit="contain"
                         />
                     </Show>
+
                 </Stack>
                 <Stack
                     bg={useColorModeValue('gray.50', 'gray.700')}
@@ -139,14 +194,15 @@ export default function Register() {
                             teamMembers: "",
                             domain: "",
                             projectTitle: "",
-                            projectAbstract: "",
                             eventName: "",
                         }}
                         onSubmit={(values, actions) => {
                             actions.setSubmitting(false);
+                            values.projectAbstract = imageUrl;
                             values.eventName = eventName;
+                            console.log(values);
                             addResponse(values);
-                            navigate("/thank-you")
+                            navigate("/thank-you");
                         }}
                     >
                         {(props) => (
@@ -422,19 +478,12 @@ export default function Register() {
                                         )}
                                     </Field>
 
-                                    <Field name='projectAbstract' validate={validateInput}>
+                                    <Field>
                                         {({ field, form }) => (
                                             <FormControl isInvalid={form.errors.projectAbstract && form.touched.projectAbstract}>
                                                 <FormLabel>Project Abstract</FormLabel>
-                                                <Textarea
-                                                    {...field}
-                                                    bg={'gray.100'}
-                                                    border={0}
-                                                    color={'gray.500'}
-                                                    _placeholder={{
-                                                        color: 'gray.500',
-                                                    }}
-                                                />
+                                                <Input type={"file"} onChange={(e) => { setFile(e.target.files[0]) }} />
+                                                <Button onClick={upload}>Upload</Button>
                                                 <FormErrorMessage>{form.errors.projectAbstract}</FormErrorMessage>
                                             </FormControl>
                                         )}
@@ -445,6 +494,7 @@ export default function Register() {
                                         fontFamily={'heading'}
                                         mt={8}
                                         w={'full'}
+                                        isActive={buttonState}
                                         bgGradient="linear(to-r, red.400,pink.400)"
                                         color={'white'}
                                         _hover={{

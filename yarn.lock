@@ -2525,6 +2525,11 @@
     prop-types "^15.7.2"
     tslib "^2.1.0"
 
+"@react-native-firebase/storage@^14.5.1":
+  version "14.5.1"
+  resolved "https://registry.yarnpkg.com/@react-native-firebase/storage/-/storage-14.5.1.tgz#e22e74732a9565d90a359f51bc6249a0efffde02"
+  integrity sha512-QGLJ5IanXhFfhefwH61rvz7cNRFkFs7X90djBqfhKwIeh7ASN9YZLBaME0k/nyLkWnwN5HCfqi4kdVzVhlNkMQ==
+
 "@rollup/plugin-babel@^5.2.0":
   version "5.3.0"
   resolved "https://registry.yarnpkg.com/@rollup/plugin-babel/-/plugin-babel-5.3.0.tgz#9cb1c5146ddd6a4968ad96f209c50c62f92f9879"
@@ -8566,11 +8571,6 @@ react-router-dom@^6.2.1:
   dependencies:
     history "^5.2.0"
     react-router "6.2.1"
-
-react-router-scroll-top@^0.3.1:
-  version "0.3.1"
-  resolved "https://registry.yarnpkg.com/react-router-scroll-top/-/react-router-scroll-top-0.3.1.tgz#ba5248563ac83c09ad17df857dba79751f97239f"
-  integrity sha512-sdIYw7SVAqWNcH/WhNHIPsOrIVUEUUHYuddGj7aMNjRCTwAfZo2B/CHqXElAnDdSd9MMCfVFfWxtroi1ozTb8Q==
 
 react-router@6.2.1:
   version "6.2.1"

@@ -43,18 +43,19 @@ export function TestmonialCard({ heading, content }) {
                 bg: useColorModeValue('#333', '#DDD'),
             }}
             onClick={() => navigate("/register")}>
-            <Flex        
+            <Flex
                 isCentered
                 direction={'column'}
                 textAlign={'center'}
                 justifyContent={'space-between'}>
                 <chakra.h1
                     textAlign={"center"}
-                    fontSize={'2xl'}
+                    fontSize={'4xl'}
                     py={2}
                     fontWeight={'bold'}
+                    fontFamily={'Sansita Swashed'}
                     color={useColorModeValue('white', 'black')}
-                    >
+                >
                     {heading}
                 </chakra.h1>
                 <chakra.p
@@ -62,11 +63,11 @@ export function TestmonialCard({ heading, content }) {
                     textAlign={"center"}
                     fontWeight={'medium'}
                     fontSize={'15px'}
-                    color={useColorModeValue('whiteAlpha.700', 'blackAlpha.700')}            
+                    color={useColorModeValue('whiteAlpha.700', 'blackAlpha.700')}
                     pb={2}>
                     {content}
                 </chakra.p>
             </Flex>
-        </Flex>
+        </Flex >
     );
 }

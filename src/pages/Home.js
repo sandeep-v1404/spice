@@ -139,6 +139,7 @@ const Home = () => {
             <Flex
                 textAlign={'center'}
                 pt={10}
+                mb={'20px'}
                 justifyContent={'center'}
                 direction={'column'}
                 width={'full'}>
@@ -159,8 +160,8 @@ const Home = () => {
                     ))}
                 </SimpleGrid>
             </Flex>
-
-            <Container centerContent maxW="7xl" pt={5} px={{ base: 2, sm: 12, md: 17 }} py={4}>
+            <hr />
+            <Container centerContent maxW="7xl" pt={5} mt={'20px'} px={{ base: 2, sm: 12, md: 17 }} py={4}>
                 <chakra.h1
                     textAlign={'center'}
                     fontSize={'4xl'}
